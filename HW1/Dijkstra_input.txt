@@ -1,0 +1,7 @@
+{
+    "A": [{"node": "B", "weight": 6}, {"node": "D", "weight": 1}],
+    "B": [{"node": "E", "weight": 2}, {"node": "C", "weight": 5}, {"node": "D", "weight": 2}, {"node": "A", "weight": 6}],
+    "C": [{"node": "B", "weight": 5}, {"node": "E", "weight": 5}],
+    "D": [{"node": "E", "weight": 1}, {"node": "B", "weight": 2}, {"node": "A", "weight": 1}],
+    "E": [{"node": "C", "weight": 5}, {"node": "D", "weight": 1}, {"node": "B", "weight": 2}]
+}
