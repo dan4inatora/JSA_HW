@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 class Graph {
    constructor() {
       this.edges = {};
@@ -20,6 +22,22 @@ class Graph {
          graph += node + "->" + this.edges[node].map(n => n.node).join(", ") + "\n";
       });
       console.log(graph);
+   }
+
+   parseInput(inputfile){
+   		const inputstr = `./${inputfile}.txt`;
+   		var result = JSON.parse(fs.readFileSync(inputstr, 'utf-8'));
+ 
+   		Object.keys(result).map(crrnode => {
+   			this.nodes.push(crrnode);
+   			this.edges[crrnode] = [];
+   			result[crrnode].forEach(edge => {
+   				this.edges[crrnode].push({ node: edge['node'], weight: edge['weight']});
+   				
+   			});
+   		});
+
+   		
    }
 
    dijkstra(start, finish){
@@ -45,21 +63,29 @@ class Graph {
 }
 
 let map = new Graph();
-map.addNode("A");
-map.addNode("B");
-map.addNode("C");
-map.addNode("D");
-map.addNode("E");
-map.addEdge("A", "B", 6);
-map.addEdge("A", "D", 1);
-map.addEdge("D", "E", 1);
-map.addEdge("D", "B", 2);
-map.addEdge("B", "E", 2);
-map.addEdge("B", "C", 5);
-map.addEdge("E", "C", 5);
+let map2 = new Graph();
+//map.addNode("A");
+//map.addNode("B");
+//map.addNode("C");
+//map.addNode("D");
+//map.addNode("E");
+//map.addEdge("A", "B", 6);
+//map.addEdge("A", "D", 1);
+//map.addEdge("D", "E", 1);
+//map.addEdge("D", "B", 2);
+//map.addEdge("B", "E", 2);
+//map.addEdge("B", "C", 5);
+//map.addEdge("E", "C", 5);
+//map.display();
+//let solution = map.dijkstra("A", "C");
+//console.log(`Smallest Path from A to C - [${makeBackTrace("A", "C", solution.backtrace)}] is ${solution.s_path} long`);
+
+map.parseInput("Dijkstra_input");
 map.display();
 let solution = map.dijkstra("A", "C");
 console.log(`Smallest Path from A to C - [${makeBackTrace("A", "C", solution.backtrace)}] is ${solution.s_path} long`);
+
+
 
 function getKey(object, value){
 	for(let key in object){
